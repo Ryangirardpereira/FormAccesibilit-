@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <title>Form</title>
+  <script src="script.js"></script>
+
+</head>
+<body>
+  <main>
+  <div class="bg-gradient" role="presentation">
+
+  </div>
+  <div class="card-img" role="img" aria-label="Image Card">
+    <div id="front">
+      <div class="logo">
+        <div id="logo-full" role="img" aria-label="Image Card front" ></div>
+        <div id="logo-empty" role="img "aria-label="Image Card Back"></div>
+      </div>
+      <div class="text">
+        <p id="output-number" role="contentinfo" aria-label="Card Number">0000 0000 0000</p>
+        <div class="card-info-txt">
+          <p id="output-name">Jane Appleseed</p>
+          <div class="date-otpt">
+            <p id="output-date-mm">09</p><p>/</p><p id="output-date-yy">00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="back">
+      <div class="text">
+        <p id="output-cvc">000</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="card-form" role="form" aria-label="Card Form">
+    <form action="" onsubmit="return validateForm()" id="card-form-js">
+      <label for="cardholder-name">CARDHOLDER NAME</label>
+      <input type="text" id="cardholder-name" name="cardholder-name" placeholder="Jane Appleseed" required aria-label=" Card Holder Name">
+  
+      <label for="card-number">CARD NUMBER</label>
+      <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9123 0000" required maxlength="16" aria-label="Card Number">
+      <div class="label-info" role="presentation">
+        <label for="exp-date">EXP. DATE (MM/YY)</label>
+        <label for="cvc">CVC</label>
+      </div>
+      <div class="card-date-cvc"> 
+        <input type="text" id="exp-date-mm" name="exp-date" placeholder="MM" maxlength="2" required aria-label="Expiration Date Month">
+        <input type="text" id="exp-date-yy" name="exp-date" placeholder="YY" maxlength="2" required aria-label="Expiration Date Year">
+        
+        <div>
+          <input type="text" id="cvc" name="cvc" placeholder="123" maxlength="3" required aria-label="CVC">
+        </div>
+      </div>
+      <input type="submit" value="Confirm">
+  </form>
+  <script>
+    const cardNumberInput = document.getElementById("card-number");
+    const cardNumberError = document.getElementById("card-number-error");
+
+    cardNumberInput.addEventListener("blur", function() {
+        const cardNumberValue = cardNumberInput.value.trim();
+        if (cardNumberValue === "" || !validateCardNumber(cardNumberValue)) {
+            cardNumberError.style.display = "block";
+        } else {
+            cardNumberError.style.display = "none";
+        }
+    });
+
+    function validateCardNumber(cardNumber) {
+        const re = /^\d{16}$/;
+        return re.test(cardNumber);
+    }
+  </script>
+  <div class="success-message" role="alert" aria-live="assertive">
+    <img src="/images/icon-complete.svg" alt="Success Image">
+    <h1>THANK YOU!</h1>
+    <a href=""><input type="submit" value="Continue"></a>
+  </div>
+  </div>
+  </main>
+  </body>
+</html>
